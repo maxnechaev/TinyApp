@@ -1,0 +1,27 @@
+{
+  "name": "tinyurl",
+  "version": "1.0.0",
+  "description": "TinyApp Project for web links shortening",
+  "main": "express_server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/maxnechaev/TinyApp.git"
+  },
+  "keywords": [
+    "url",
+    "app"
+  ],
+  "author": "Max Nechaev",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/maxnechaev/TinyApp/issues"
+  },
+  "homepage": "https://github.com/maxnechaev/TinyApp#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}

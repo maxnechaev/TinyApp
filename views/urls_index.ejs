@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <!-- Add your EJS code here -->
+    <% include ./partials/_header %>
+
+    <h2>Loop</h2>
+      <ul>
+        <% for (var shortUrl in urls) {  %>
+        <li><%= shortUrl %> - <%= urls[shortUrl] %></li>
+        <% }; %>
+      </ul>
+
+
+
+
+</body>
+</html>
