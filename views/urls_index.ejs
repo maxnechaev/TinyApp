@@ -6,9 +6,13 @@
 
     <h2>Loop</h2>
       <ul>
-        <% for (var shortUrl in urls) {  %>
-        <li><%= shortUrl %> - <%= urls[shortUrl] %></li>
+        <% for (var shortURL in urls) {  %>
+        <li><%= shortURL %> - <%= urls[shortURL] %></li>
+        <form method="POST" action="/urls/<%= shortURL %>/delete">
+          <button type="submit" name="button"> Delete </button>
+        </form>
         <% }; %>
+
       </ul>
 
 
