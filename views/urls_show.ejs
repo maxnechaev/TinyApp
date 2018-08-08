@@ -2,11 +2,21 @@
 <html>
 
 <body>
-    <!-- Add your EJS code here -->
-    <% include ./partials/_header %>
+  <% include ./partials/_header %>
+    <h2>Here is the list of URLs:</h2>
+    <ol>
+      <li><label for="longURL">Change
+           <% console.log("ejs log", longURL) %>
+           <%= longURL %> to </label></li>
+      <form method="POST" action="/urls/<%= shortURL %>/update">
+        <input type="text" style="width: 300px" name="longURL" value="<%= longURL %>">
+        <button type="submit" name="updateButton"> Update </button>
+      </form>
+      <br>
+    </ol>
 
-    <h2>Loop</h2>
-
+    <a href="/urls/new">Add a website to this list</a>
 
 </body>
+
 </html>

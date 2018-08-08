@@ -10,21 +10,23 @@ const urlDatabase = {
 };
 
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 function generateRandomString() {
   var shortURL = "";
   var abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (var i = 0; i < 6; i++){
+  for (var i = 0; i < 6; i++) {
     shortURL += abc.charAt(Math.floor(Math.random() * abc.length));
   }
   return shortURL;
 }
 
-console.log(generateRandomString());
-
 app.get("/", (req, res) => {
-  let templateVars = { urls: urlDatabase };
+  let templateVars = {
+    urls: urlDatabase
+  };
   res.render("urls_index", templateVars);
 });
 
@@ -32,7 +34,14 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
 
-app.get("/urls/:id", (req, res) => {
+app.get("/urls", (req, res) => {
+  let templateVars = {
+    urls: urlDatabase
+  };
+  res.render("urls_index", templateVars);
+});
+
+app.get("/urls/:longURL", (req, res) => {
   let templateVars = {
     shortURL: req.params.id,
     longURL: urlDatabase[req.params.id]
@@ -42,27 +51,49 @@ app.get("/urls/:id", (req, res) => {
 
 app.get("/u/:shortURL", (req, res) => {
   let shortURL = req.params.shortURL;
-  res.redirect(urlDatabase[shortURL]);
-});
-
-app.get("/urls", (req, res) => {
-  let templateVars = { urls: urlDatabase };
-  res.render("urls_index", templateVars);
+  let longURL = urlDatabase[req.params.shortURL];
+  res.redirect(longURL);
 });
 
 app.post("/urls", (req, res) => {
-  var shortURL = generateRandomString();
-  var longURL = req.body.longURL;
+  let shortURL = generateRandomString();
+  let longURL = req.body.longURL;
+  // console.log("request body", req.body);
   urlDatabase[shortURL] = longURL;
-  console.log(urlDatabase);
-  res.send(`<html><body><a href="http://localhost:8080/u/${shortURL}">http://localhost:8080/u/${shortURL}</a></body></html>`);
+  res.send(
+    `<html>
+      <body>
+        Here is your short link:
+        <a href="http://localhost:8080/u/${shortURL}">http://localhost:8080/u/${shortURL}</a>
+        <br />
+        <br />
+        <a href="http://localhost:8080/urls">Go to the main page</a>
+      </body>
+    </html>`);
+});
+
+app.get("/urls/:shortURL/update", (req, res) => { //gives the full list for some reason
+  const shortURL = req.params.shortURL;
+  const longURL = urlDatabase[shortURL];
+  const templateVars = {
+    shortURL: shortURL,
+    longURL: longURL
+  };
+  res.render("urls_show", templateVars);
+});
+
+app.post("/urls/:shortURL/update", (req, res) => {
+  const shortURL = req.params.shortURL;
+  const longURL = req.body.longURL;
+  urlDatabase[shortURL] = longURL;
+  res.redirect("/urls");
+
 });
 
 app.post("/urls/:shortURL/delete", (req, res) => {
   delete urlDatabase[req.params.shortURL];
-  res.redirect("/");
+  res.redirect("/urls");
 });
 
 app.listen(PORT);
 console.log(`Server is listening to port ${PORT}`);
-generateRandomString();

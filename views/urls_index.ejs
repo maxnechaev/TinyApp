@@ -1,22 +1,44 @@
 <!DOCTYPE html>
 <html>
+<head>
+<link rel="stylesheet" href="/css/main.css">
+</head>
 <body>
-    <!-- Add your EJS code here -->
-    <% include ./partials/_header %>
 
-    <h2>Loop</h2>
-      <ul>
+  <% include ./partials/_header %>
+
+    <h2>Here is the list of URLs:</h2>
+    <ol>
+      <div>
         <% for (var shortURL in urls) {  %>
-        <li><%= shortURL %> - <%= urls[shortURL] %></li>
-        <form method="POST" action="/urls/<%= shortURL %>/delete">
-          <button type="submit" name="button"> Delete </button>
-        </form>
-        <% }; %>
+          <li>
+            <a href="http://localhost:8080/u/<%= shortURL %>">
+              <%= shortURL %>
+            </a>
+            &nbsp; &#8594; &nbsp;
+            <%= urls[shortURL] %>
 
-      </ul>
+            <div class="row">
+              <div>
+                  <form method="GET" action="/urls/<%= shortURL %>/update">
+                    <button type="submit" name="updateButton"> Update </button>
+                  </form>
+              </div>
+              <div>
+                  <form method="POST" action="/urls/<%= shortURL %>/delete">
+                    <button type="submit" name="deleteButton"> Delete </button>
+                  </form>
+              </div>
+            </div>
 
+              <br>
+              <% }; %>
+          </li>
+      </div>
+    </ol>
 
-
+    <a href="/urls/new">Add a website to this list</a>
 
 </body>
+
 </html>
