@@ -1,3 +1,27 @@
-
-
 <title>Tiny App</title>
+
+<% if (id){ %>
+  <div style="float:right;">
+
+    <form method="POST" action="/logout">
+      You can <button type="submit" name="logoutButton"> logout </button> any time
+    </form>
+
+  </div>
+
+<% } else { %>
+  <!-- <form action="/login" method="POST" style="float:right; font-size:15px; margin-right:15px;">
+    <em><strong><label for="username">username: &nbsp;</label></strong></em>
+    <input id="username" type="text" name="username" style="float:right; width: 150px;">
+    <br /><br />
+    <em><strong><label for="password">password: &nbsp;</label></strong></em>
+    <input id="password" type="password" name="password" style="float:right; width: 150px;">
+    <br /><br />
+    <input type="submit" value="login" style="float:right; width: 157px;">
+    <br> -->
+    <p style="float:right;"><a href="../login"><strong>Login</strong></a>
+      or
+      <a href="../register"><strong>register</strong></a> here.
+    </p>
+  <!-- </form> -->
+<% }%>

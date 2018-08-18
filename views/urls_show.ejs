@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 
-<body>
+<body style="font-size:15px; margin: 10px;">
   <% include ./partials/_header %>
     <h2>Here is the list of URLs:</h2>
     <ol>
       <li><label for="longURL">Change
-           <% console.log("ejs log", longURL) %>
            <%= longURL %> to </label></li>
       <form method="POST" action="/urls/<%= shortURL %>/update">
         <input type="text" style="width: 300px" name="longURL" value="<%= longURL %>">
@@ -15,7 +14,7 @@
       <br>
     </ol>
 
-    <a href="/urls/new">Add a website to this list</a>
+    <a href="/urls/new" style="margin-left: 15px;">Add a website to this list</a>
 
 </body>
 
